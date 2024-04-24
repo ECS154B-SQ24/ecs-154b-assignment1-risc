@@ -57,8 +57,8 @@ class SingleCycleCPU(implicit val conf: CPUConfig) extends BaseCPU {
   aluControl.io.funct3 := instruction(14, 12)
 
   alu.io.operation := aluControl.io.operation
-  alu.io.operand1 := registers.io.readreg1
-  alu.io.operand2 := registers.io.readreg2
+  alu.io.operand1 := registers.io.readdata1
+  alu.io.operand2 := registers.io.readdata2
 
   registers.io.writedata := alu.io.result
 }
