@@ -48,7 +48,7 @@ class SingleCycleCPU(implicit val conf: CPUConfig) extends BaseCPU {
   registers.io.readreg1 := instruction(19, 15)
   registers.io.readreg2 := instruction(24, 20)
   registers.io.writereg := instruction(11, 7)
-  registers.io.writedata := alu.io.result
+  registers.io.writedata := Mux(registers.io.writereg === 0.U, 0.U, alu.io.result) // Set writedata to zero for register 0
   registers.io.wen := control.io.writeback_valid
 
   //EXECUTE
@@ -60,7 +60,8 @@ class SingleCycleCPU(implicit val conf: CPUConfig) extends BaseCPU {
   alu.io.operand1 := registers.io.readdata1
   alu.io.operand2 := registers.io.readdata2
 
-  registers.io.writedata := alu.io.result
+  pc := pc + 4.U
+
 }
 
 /*
