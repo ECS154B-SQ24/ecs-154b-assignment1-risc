@@ -42,6 +42,7 @@ class SingleCycleCPU(implicit val conf: CPUConfig) extends BaseCPU {
     instruction := io.imem.instruction(31, 0)
   }
 
+  //Your code goes here
   //DECODE
   control.io.opcode := instruction(6, 0)
   registers.io.readreg1 := instruction(19, 15)
